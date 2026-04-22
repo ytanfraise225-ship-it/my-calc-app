@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンプル計算機</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg w-80">
+        <h1 class="text-xl font-bold mb-4 text-center text-gray-700">計算アプリ</h1>
+        <input type="text" id="result" readonly class="w-full mb-4 p-4 text-right text-2xl border rounded bg-gray-50 focus:outline-none">
+        
+        <div class="grid grid-cols-4 gap-2">
+            <button onclick="clearDisplay()" class="col-span-2 bg-red-400 text-white p-4 rounded hover:bg-red-500">C</button>
+            <button onclick="appendToDisplay('/')" class="bg-blue-500 text-white p-4 rounded hover:bg-blue-600">÷</button>
+            <button onclick="appendToDisplay('*')" class="bg-blue-500 text-white p-4 rounded hover:bg-blue-600">×</button>
+            
+            <button onclick="appendToDisplay('7')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">7</button>
+            <button onclick="appendToDisplay('8')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">8</button>
+            <button onclick="appendToDisplay('9')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">9</button>
+            <button onclick="appendToDisplay('-')" class="bg-blue-500 text-white p-4 rounded hover:bg-blue-600">-</button>
+            
+            <button onclick="appendToDisplay('4')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">4</button>
+            <button onclick="appendToDisplay('5')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">5</button>
+            <button onclick="appendToDisplay('6')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">6</button>
+            <button onclick="appendToDisplay('+')" class="bg-blue-500 text-white p-4 rounded hover:bg-blue-600">+</button>
+            
+            <button onclick="appendToDisplay('1')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">1</button>
+            <button onclick="appendToDisplay('2')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">2</button>
+            <button onclick="appendToDisplay('3')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">3</button>
+            <button onclick="calculate()" class="row-span-2 bg-green-500 text-white p-4 rounded hover:bg-green-600">=</button>
+            
+            <button onclick="appendToDisplay('0')" class="col-span-2 bg-gray-200 p-4 rounded hover:bg-gray-300">0</button>
+            <button onclick="appendToDisplay('.')" class="bg-gray-200 p-4 rounded hover:bg-gray-300">.</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('result');
+
+        function appendToDisplay(input) {
+            display.value += input;
+        }
+
+        function clearDisplay() {
+            display.value = "";
+        }
+
+        function calculate() {
+            try {
+                // 安全のためevalの代わりにFunctionを使用
+                display.value = new Function('return ' + display.value)();
+            } catch (error) {
+                display.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
